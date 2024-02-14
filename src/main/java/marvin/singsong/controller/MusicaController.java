@@ -30,6 +30,7 @@ public class MusicaController {
         return musicaRepository.pegar_musica_id(id_mudica);
     }
 
+    @SuppressWarnings("null")
     @PostMapping("/incluir_musica")
     @ResponseBody
     public ResponseEntity<Void> incluir_musica(MusicaModel m) {
@@ -41,6 +42,22 @@ public class MusicaController {
     @ResponseBody
     public ResponseEntity<Void> excluir_musica(Integer id) {
         musicaRepository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/ver_cifra")
+    @ResponseBody
+    public MusicaModel ver_cifra(Integer id_musica) {
+        return musicaRepository.pegar_musica_id(id_musica);
+    }
+
+    @PostMapping("/incluir_cifra")
+    @ResponseBody
+    public ResponseEntity<Void> incluir_cifra(MusicaModel m) {
+
+        MusicaModel musica = musicaRepository.pegar_musica_id(m.getId());
+        musica.setCifra(m.getCifra());
+        musicaRepository.save(musica);
         return ResponseEntity.ok().build();
     }
 }

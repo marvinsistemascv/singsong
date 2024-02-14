@@ -9,6 +9,7 @@ public class MusicaModel {
     @JoinColumn
     private Integer id;
     private String musica;
+    private String cifra;
     private Integer id_bloco;
 
     public Integer getId() {
@@ -33,5 +34,13 @@ public class MusicaModel {
 
     public void setId_bloco(Integer id_bloco) {
         this.id_bloco = id_bloco;
+    }
+
+    public String getCifra() {
+        return cifra;
+    }
+
+    public void setCifra(String cifra) {
+        this.cifra = cifra;
     }
 }

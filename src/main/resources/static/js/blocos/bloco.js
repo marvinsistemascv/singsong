@@ -66,9 +66,9 @@ async function carregarBlocos() {
 
         // Construir a estrutura HTML para cada bloco
         const cardHtml = `
-<div class="card card-primary card-outline">
+<div class="card card-danger card-outline">
     <div class="card-header">
-        <h5 class="card-title" id="nome_bloco">${bloco.bloco}</h5>
+        <h5 class="card-title" id="nome_bloco"><b>${bloco.bloco}</b></h5>
         <div class="card-tools">
             <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
                 <i class="fas fa-music"></i>
@@ -100,14 +100,81 @@ async function carregarBlocos() {
     console.error('Erro ao buscar blocos:', error);
   }
 }
-
 function construirListaMusicas(musicas) {
+  let tabelaHtml = '<div class="row"><div class="col-md-12"><table class="table">';
+  tabelaHtml += '<tbody>';
+
+  musicas.forEach(function (musica) {
+    tabelaHtml += '<tr>';
+    tabelaHtml += `<td>${musica.musica}</td>`;
+    tabelaHtml += `<td style="padding:20px;">`;
+    tabelaHtml += `<button class="btn btn-outline-danger btn-sm" type="button" onclick="excluir_musica(${musica.id})"><i class="fas fa-trash"></i></button>`;
+    tabelaHtml += `<button class="btn btn-outline-warning btn-sm" type="button" onclick="ver_cifra(${musica.id})"><i class="fas fa-guitar"></i></button>`;
+    tabelaHtml += `</td>`;
+    tabelaHtml += '</tr>';
+  });
+
+  tabelaHtml += '</tbody></table></div></div>';
+  return tabelaHtml;
+}
+
+async function ver_cifra(id) {
+
+  var formData = new FormData();
+  formData.append("id_musica", id);
+  fetch('/ver_cifra', {
+    method: 'POST',
+    body: formData
+  })
+    .then(response => {
+      if (response.ok)
+        var contentType = response.headers.get("content-type");
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        return response.json().then(async function (musica) {
+          if (musica.cifra) {
+            window.open(musica.cifra, '_blank');
+          } else {
+            const { value: url } = await Swal.fire({
+              input: "url",
+              inputLabel: "incluir a cifra",
+              inputPlaceholder: "cole o link aqui..."
+            });
+            if (url) {
+              incluir_cifra(musica.id, url);
+            }
+
+          }
+
+        })
+      }
+    });
+}
+
+function incluir_cifra(id, url) {
+
+  var formData = new FormData();
+  formData.append("id", id);
+  formData.append("cifra", url);
+
+  fetch('/incluir_cifra', {
+      method: 'POST',
+      body: formData
+  })
+      .then(response => {
+          if (!response.ok) {
+             window.location.reload(true);
+          } 
+      })
+
+}
+
+function construirListaMusicas_bkp(musicas) {
   let listaHtml = '<div class="row"><div class="col-md-6"><ul>';
 
   musicas.forEach(function (musica, index) {
     if (index < Math.ceil(musicas.length / 2)) {
       // Primeira coluna
-     listaHtml += `<li>${musica.musica+'  '}<a style="color:#FF4500;" type="button" onclick="excluir_musica(${musica.id})"><img src="/img/lixeira.png" width="20px" height="20px"></a></li>`;
+      listaHtml += `<li>${musica.musica + '  '}<a style="color:#FF4500;" type="button" onclick="excluir_musica(${musica.id})"><img src="/img/lixeira.png" width="30px" height="30px"></a><a style="color:#FF4500;" type="button" onclick="excluir_musica(${musica.id})"><img src="/img/cifra.png" width="40px" height="40px"></a></li>`;
     }
   });
 
@@ -116,7 +183,7 @@ function construirListaMusicas(musicas) {
   musicas.forEach(function (musica, index) {
     if (index >= Math.ceil(musicas.length / 2)) {
       // Segunda coluna
-      listaHtml += `<li>${musica.musica+'  '}<a style="color:#FF4500;" type="button" onclick="excluir_musica(${musica.id})"><img src="/img/lixeira.png" width="20px" height="20px"></a></li>`;
+      listaHtml += `<li>${musica.musica + '  '}<a style="color:#FF4500;" type="button" onclick="excluir_musica(${musica.id})"><img src="/img/lixeira.png" width="20px" height="20px"></a></li>`;
     }
   });
 
@@ -159,7 +226,7 @@ async function obterMusicasDoBloco(idBloco) {
     return [];
   }
 }
-async function adicionar_musica(id_bloco) {
+async function adicionar_musica2(id_bloco) {
 
   const { value: musica } = await Swal.fire({
     title: "adicionar musica",
@@ -190,6 +257,77 @@ async function adicionar_musica(id_bloco) {
           });
         }
       })
+  }
+}
+
+async function adicionar_musica(id_bloco) {
+
+  $('#modal_calendario_letivo').modal('hide');
+
+  const { value: formValues } = await Swal.fire({
+    title: 'Incluir Música',
+    html:
+      '<input id="musica" type="text" class="form-control" placeholder="música">' +
+      '<input id="cifra" type="text" class="form-control" placeholder="link da cifra">',
+    focusConfirm: false,
+    preConfirm: () => {
+      return [
+        document.getElementById('musica').value,
+        document.getElementById('cifra').value
+      ];
+    }
+  });
+
+  if (formValues) {
+    const [musica, cifra] = formValues;
+
+    if (!musica) {
+      Swal.fire({
+        title: 'Erro',
+        text: 'informe o nome da musica',
+        icon: 'error'
+      });
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('id_bloco', id_bloco);
+    formData.append('musica', musica);
+    formData.append('cifra', cifra);
+
+    try {
+      const response = await fetch('/incluir_musica', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        Swal.fire({
+          title: 'Sucesso',
+          text: responseData.message,
+          timer: 2000,
+          icon: 'success'
+        });
+        setTimeout(() => {
+          window.location.reload(true);
+        }, 800);
+
+      } else {
+        const errorData = await response.json();
+        Swal.fire({
+          title: 'Erro',
+          text: errorData.message,
+          icon: 'error'
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        title: 'Erro',
+        text: 'Falha ao enviar a solicitação para o servidor. ' + error,
+        icon: 'error'
+      });
+    }
   }
 }
 
@@ -237,7 +375,7 @@ function excluir_musica(id) {
     }
   });
 }
-function excluir_bloco(id){
+function excluir_bloco(id) {
   Swal.fire({
     title: "Remover bloco?",
     text: "confirma  ?",
