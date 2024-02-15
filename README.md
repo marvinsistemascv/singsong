@@ -7,7 +7,16 @@ requisitos :
 Java 11
 Mysql 8
 
-abra o projeto com uma ide para spring boot, compile o *.jar e execute pelo cmd, usuário padrão : admin senha : admin
+abra o projeto com uma ide para spring boot, compile o *.jar e execute pelo cmd
+
+acessando : 
+
+localhost:8899/login
+usuário padrão : admin@admin.com
+senha : 123
+
+
+obs : para acessar em rede troqueo "localhost" pelo nome ou endereço de ip do servidor 
 
 Gustavo Matos
 gustavo3635@hotmail.com
