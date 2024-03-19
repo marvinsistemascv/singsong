@@ -107,10 +107,10 @@ function construirListaMusicas(musicas) {
   musicas.forEach(function (musica) {
     tabelaHtml += '<tr>';
     tabelaHtml += `<td>${musica.musica}</td>`;
-    tabelaHtml += `<td style="padding:20px;">`;
-    tabelaHtml += `<button class="btn btn-outline-danger btn-sm" type="button" onclick="excluir_musica(${musica.id})"><i class="fas fa-trash"></i></button>`;
+    tabelaHtml += '<td>';
+    tabelaHtml += `<button class="btn btn-outline-danger btn-sm" type="button" onclick="excluir_musica(${musica.id})" style="margin-right: 10px;"><i class="fas fa-trash"></i></button>`;
     tabelaHtml += `<button class="btn btn-outline-warning btn-sm" type="button" onclick="ver_cifra(${musica.id})"><i class="fas fa-guitar"></i></button>`;
-    tabelaHtml += `</td>`;
+    tabelaHtml += '</td>';
     tabelaHtml += '</tr>';
   });
 
