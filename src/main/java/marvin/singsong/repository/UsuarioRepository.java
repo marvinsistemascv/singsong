@@ -1,6 +1,5 @@
 package marvin.singsong.repository;
 
-
 import marvin.singsong.model.UsuarioModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,6 +15,9 @@ public interface UsuarioRepository extends JpaRepository<UsuarioModel, Integer> 
 
     @Query(value = "SELECT * FROM usuario_model as a where a.email =:email and a.senha =:senha and a.sit ='Ativo'", nativeQuery = true)
     UsuarioModel checarLogin(@Param("email") String email, @Param("senha") String senha);
+
+    @Query(value = "SELECT * FROM usuario_model as a where a.nome = 'userpadrão'", nativeQuery = true)
+    UsuarioModel checarLoginPadrao();
 
     @Query(value = "SELECT * FROM usuario_model as a where a.email =:email and a.sit ='Ativo'", nativeQuery = true)
     UsuarioModel pegarUsuariosEmail(@Param("email") String email);

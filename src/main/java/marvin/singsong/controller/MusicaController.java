@@ -51,12 +51,28 @@ public class MusicaController {
         return musicaRepository.pegar_musica_id(id_musica);
     }
 
+    @PostMapping("/ver_letra")
+    @ResponseBody
+    public MusicaModel ver_letra(Integer id_musica) {
+        return musicaRepository.pegar_musica_id(id_musica);
+    }
+
     @PostMapping("/incluir_cifra")
     @ResponseBody
     public ResponseEntity<Void> incluir_cifra(MusicaModel m) {
 
         MusicaModel musica = musicaRepository.pegar_musica_id(m.getId());
         musica.setCifra(m.getCifra());
+        musicaRepository.save(musica);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/incluir_letra")
+    @ResponseBody
+    public ResponseEntity<Void> incluir_letra(MusicaModel m) {
+
+        MusicaModel musica = musicaRepository.pegar_musica_id(m.getId());
+        musica.setLetra(m.getLetra());
         musicaRepository.save(musica);
         return ResponseEntity.ok().build();
     }

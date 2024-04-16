@@ -101,15 +101,18 @@ async function carregarBlocos() {
   }
 }
 function construirListaMusicas(musicas) {
-  let tabelaHtml = '<div class="row"><div class="col-md-12"><table class="table">';
+  let tabelaHtml = '<div class="row"><div class="col-md-12"><table class="table table-striped">';
   tabelaHtml += '<tbody>';
 
   musicas.forEach(function (musica) {
     tabelaHtml += '<tr>';
-    tabelaHtml += `<td>${musica.musica}</td>`;
+    tabelaHtml += `<td style="font-size:22px;">${musica.musica}</td>`;
     tabelaHtml += '<td>';
+
+    tabelaHtml += `<button style="margin-right:20px;" class="btn btn-outline-primary btn-sm" type="button" onclick="ver_letra(${musica.id})"><i class="far fa-file-word"></i></button>`;
+    tabelaHtml += `<button style="margin-right:20px;" class="btn btn-outline-warning btn-sm" type="button" onclick="ver_cifra(${musica.id})"><i class="fas fa-guitar"></i></button>`;
     tabelaHtml += `<button class="btn btn-outline-danger btn-sm" type="button" onclick="excluir_musica(${musica.id})" style="margin-right: 10px;"><i class="fas fa-trash"></i></button>`;
-    tabelaHtml += `<button class="btn btn-outline-warning btn-sm" type="button" onclick="ver_cifra(${musica.id})"><i class="fas fa-guitar"></i></button>`;
+
     tabelaHtml += '</td>';
     tabelaHtml += '</tr>';
   });
@@ -150,6 +153,62 @@ async function ver_cifra(id) {
     });
 }
 
+function incluir_letra(id, letra) {
+
+  var formData = new FormData();
+  formData.append("id", id);
+  formData.append("letra", letra);
+
+  fetch('/incluir_letra', {
+    method: 'POST',
+    body: formData
+  })
+    .then(response => {
+      if (!response.ok) {
+        window.location.reload(true);
+      }
+    })
+
+}
+
+function ver_letra(id) {
+
+  var formData = new FormData();
+  formData.append("id_musica", id);
+  fetch('/ver_letra', {
+    method: 'POST',
+    body: formData
+  })
+    .then(response => {
+      if (response.ok)
+        var contentType = response.headers.get("content-type");
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        return response.json().then(async function (musica) {
+          if (musica.letra != null) {
+           document.querySelector('#letra_musica').innerText = musica.letra;
+           $("#letra").modal({
+            show: true
+          });
+          } else {
+            const { value: letra } = await Swal.fire({
+              input: "textarea",
+              inputLabel: "incluir a letra",
+              inputPlaceholder: "cole a letra aqui..."
+            });
+            if (letra) {
+              incluir_letra(musica.id, letra);
+            }
+
+          }
+
+        })
+      }else{
+        console.log('carai mano');
+      }
+    });
+}
+
+
 function incluir_cifra(id, url) {
 
   var formData = new FormData();
@@ -157,14 +216,14 @@ function incluir_cifra(id, url) {
   formData.append("cifra", url);
 
   fetch('/incluir_cifra', {
-      method: 'POST',
-      body: formData
+    method: 'POST',
+    body: formData
   })
-      .then(response => {
-          if (!response.ok) {
-             window.location.reload(true);
-          } 
-      })
+    .then(response => {
+      if (!response.ok) {
+        window.location.reload(true);
+      }
+    })
 
 }
 
@@ -250,11 +309,7 @@ async function adicionar_musica2(id_bloco) {
         if (response.ok) {
           window.location.reload(true);
         } else {
-          Swal.fire({
-            title: "Novo Bloco",
-            text: "houve um erro inesperado " + response.body,
-            icon: "question"
-          });
+          window.location.reload(true);
         }
       })
   }
@@ -322,11 +377,7 @@ async function adicionar_musica(id_bloco) {
         });
       }
     } catch (error) {
-      Swal.fire({
-        title: 'Erro',
-        text: 'Falha ao enviar a solicitação para o servidor. ' + error,
-        icon: 'error'
-      });
+      window.location.reload(true);
     }
   }
 }

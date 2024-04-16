@@ -12,6 +12,9 @@ public class MusicaModel {
     private String cifra;
     private Integer id_bloco;
 
+    @Lob
+    private String letra;
+
     public Integer getId() {
         return id;
     }
@@ -42,5 +45,13 @@ public class MusicaModel {
 
     public void setCifra(String cifra) {
         this.cifra = cifra;
+    }
+
+    public String getLetra() {
+        return letra;
+    }
+
+    public void setLetra(String letra) {
+        this.letra = letra;
     }
 }
