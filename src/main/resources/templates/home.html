@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns:xmls="http://www.w3.org/1999/xhtml"
-      xmls:layout="http://www.ultraq.net/thymeleaf/layout" xmls:th="http://thymeleaf.org">
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+    xmlns:xmls="http://www.w3.org/1999/xhtml" xmls:layout="http://www.ultraq.net/thymeleaf/layout"
+    xmls:th="http://thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <link rel="icon" type="imagem/png" href="/img/icone_mic.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" type="imagem/png" href="/img/icone_mic.png" />
     <title>Marvin SingSong</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="/js/fontawesome-free/css/all.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
 
-      <!-- Theme style -->
+    <!-- Theme style -->
     <link rel="stylesheet" href="/css/adminlte.min.css">
 
     <link rel="stylesheet" href="/js/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
@@ -33,163 +33,151 @@
 
 
 </head>
+
 <body class="hold-transition  layout-top-nav">
-<div class="wrapper">
+    <div class="wrapper">
 
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
-        <div class="container">
-
-            <a class="nav-link" data-widget="pushmenu" href="#" role="button">
-                <img src="/img/icone_mic.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                <span class="brand-text font-weight-light"><b><u>Repertório</u></b></span>
-            </a>
-
-            <!-- Right navbar links -->
-            <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-                <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="fas fa-plus"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a type="button" data-toggle="modal"
-                           data-target="#agenda" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="/img/agenda_icone.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Agenda de Show
-                                        <span class="float-right text-sm text-danger"><i
-                                                class="far fa-calendar-alt"></i></span>
-                                    </h3>
-                                    <p class="text-sm">ver agenda</p>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" onclick="incluir_bloco()" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="/img/icone_mic.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Novo Bloco
-                                        <span class="float-right text-sm text-danger"><i
-                                                class="fas fa-music"></i></span>
-                                    </h3>
-                                    <p class="text-sm">adicionar novo bloco</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="content-wrapper"
-         style="background-image: url(/img/fundo_musica.png);background-repeat: no-repeat;background-size:cover;">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
             <div class="container">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
 
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button">
+                    <img src="/img/icone_mic.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                    <span class="brand-text font-weight-light"><b><u>Repertório Gustavo Matos</u></b></span>
+                </a>
 
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
+                <!-- Right navbar links -->
+                <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+                    <!-- Messages Dropdown Menu -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <a type="button" data-toggle="modal" data-target="#agenda" class="dropdown-item">
+                                <!-- Message Start -->
+                                <div class="media">
+                                    <img src="/img/agenda_icone.png" alt="User Avatar"
+                                        class="img-size-50 mr-3 img-circle">
+                                    <div class="media-body">
+                                        <h3 class="dropdown-item-title">
+                                            Agenda de Show
+                                            <span class="float-right text-sm text-danger"><i
+                                                    class="far fa-calendar-alt"></i></span>
+                                        </h3>
+                                        <p class="text-sm">ver agenda</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" onclick="incluir_bloco()" class="dropdown-item">
+                                <!-- Message Start -->
+                                <div class="media">
+                                    <img src="/img/icone_mic.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                    <div class="media-body">
+                                        <h3 class="dropdown-item-title">
+                                            Novo Bloco
+                                            <span class="float-right text-sm text-danger"><i
+                                                    class="fas fa-music"></i></span>
+                                        </h3>
+                                        <p class="text-sm">adicionar novo bloco</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-        <!-- Main content -->
-        <div class="content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12" id="blocos-container">
+        <div class="content-wrapper"
+            style="background-image: url(/img/fundo_violao.jpeg);background-repeat: no-repeat;background-size:cover;background-attachment: fixed;">
+         
+            <div class="content">
+                <div class="container" style="max-width: 80%;">
+                    <div class="row">
+                        <div class="col-md-12" id="blocos-container">
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="float-right d-none d-sm-inline"></div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2018-2024 <a href="https://github.com/marvinsistemascv">Marvin
+                    Sistemas</a>.</strong> All rights
+            reserved.
+        </footer>
     </div>
 
-    <footer class="main-footer">
-        <!-- To the right -->
-        <div class="float-right d-none d-sm-inline"></div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2018-2024 <a href="https://github.com/marvinsistemascv">Marvin Sistemas</a>.</strong> All rights
-        reserved.
-    </footer>
-</div>
-
-<div id="agenda" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"
-     aria-labelledby="modal-cancelar-label" aria-hidden="false">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-tittle">
-                    <small style="color:#FF6347">agendado</small>
-                    <small style="color:#228B22">feito</small>
-                    <small style="color:#BEBEBE">cancelado</small>
+    <div id="agenda" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"
+        aria-labelledby="modal-cancelar-label" aria-hidden="false">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-tittle">
+                        <small style="color:#FF6347">agendado</small>
+                        <small style="color:#228B22">feito</small>
+                        <small style="color:#BEBEBE">cancelado</small>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="calendario"></div>
-            </div>
+                <div class="modal-body">
+                    <div id="calendario"></div>
+                </div>
 
-            <div class="modal-footer">
-                <div class="form-group">
-                    <small style="color:#228B22" id="recebido"></small><br>
-                    <small style="color:#FF8C00" id="receber"></small>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <small style="color:#228B22" id="recebido"></small><br>
+                        <small style="color:#FF8C00" id="receber"></small>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<div id="letra" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"
-     aria-labelledby="modal-cancelar-label" aria-hidden="false">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header">     
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+    <div id="letra" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"
+        aria-labelledby="modal-cancelar-label" aria-hidden="false">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-justify" style="column-count: 2;font-size: 18px;" id="letra_musica"></p>
+                </div>
             </div>
-            <div class="modal-body">
-                <p class="text-justify" style="column-count: 2;font-size: 18px;" id="letra_musica"></p>              
-            </div> 
         </div>
     </div>
-</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
-<!-- jQuery -->
-<!-- <script src="/js/jquery/jquery.min.js"></script>-->
-<!-- Bootstrap 4 -->
-<script src="/js/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/js/adminlte.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+    <!-- jQuery -->
+    <!-- <script src="/js/jquery/jquery.min.js"></script>-->
+    <!-- Bootstrap 4 -->
+    <script src="/js/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/js/adminlte.min.js"></script>
 
-<script src="/js/sweetalert2/sweetalert2.min.js"></script>
+    <script src="/js/sweetalert2/sweetalert2.min.js"></script>
 
-<script src="/js/blocos/bloco.js"></script>
+    <script src="/js/blocos/bloco.js"></script>
 
-<script src="/js/agenda/agenda.js"></script>
+    <script src="/js/agenda/agenda.js"></script>
 
 
 </body>
+
 </html>

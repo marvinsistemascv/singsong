@@ -63,33 +63,44 @@ async function carregarBlocos() {
       for (const bloco of blocos) {
         // Fazer requisição assíncrona para obter as músicas do bloco
         const musicas = await obterMusicasDoBloco(bloco.id);
+        const accordionId = `accordion-${bloco.id}`;
+        const collapseId = `collapse-${bloco.id}`;
 
         // Construir a estrutura HTML para cada bloco
         const cardHtml = `
-<div class="card card-danger card-outline">
-    <div class="card-header">
-        <h5 class="card-title" id="nome_bloco"><b>${bloco.bloco}</b></h5>
-        <div class="card-tools">
-            <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                <i class="fas fa-music"></i>
-            </button>
-            <div class="dropdown-menu" role="menu">
-                <button type="button" class="btn btn-tool" onclick="adicionar_musica(${bloco.id})">add música
-                    <i class="fas fa-plus"></i>
-                </button>
-                <li class="dropdown-divider"></li>
-                <button type="button" class="btn btn-tool" onclick="excluir_bloco(${bloco.id})">del bloco
-                    <i class="fas fa-trash"></i>
-                </button>
-           </div>
-        </div>
-    </div>
-    <div class="card-body">
-        <div>${construirListaMusicas(musicas)}</div>
-    </div>
-</div>
-        `;
-
+        <div class="card card-secondary card-outline" id="${accordionId}" style="margin-top:3%;">
+            <a style="color:black;" class="d-block w-100" data-toggle="collapse" href="#${collapseId}">
+                <div class="card-header">
+                    <h4 id="nome_bloco" class="card-title w-100">
+                        ${bloco.bloco}
+                        <span class="badge badge-secondary">${musicas.length} musicas</span>
+                    </h4>
+                </div>
+            </a>
+            <div class="card-header">             
+                <div class="card-tools">
+                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-toggle="dropdown"
+                        data-offset="-52">
+                        <i class="fas fa-music"></i>
+                    </button>
+                    <div class="dropdown-menu" role="menu">
+                        <button style="color:black !important;" type="button" class="btn btn-tool" onclick="adicionar_musica(${bloco.id})">add música
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <li class="dropdown-divider"></li>
+                        <button style="color:black !important;" type="button" class="btn btn-tool" onclick="excluir_bloco(${bloco.id})">del bloco
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="${collapseId}" class="collapse" data-parent="#${accordionId}">
+                <div class="card-body">
+                    <div>${construirListaMusicas(musicas)}</div>
+                </div>
+            </div>
+        </div>  
+    `;
         // Adicionar o card ao contêiner
         $('#blocos-container').append(cardHtml);
       }
@@ -109,9 +120,9 @@ function construirListaMusicas(musicas) {
     tabelaHtml += `<td style="font-size:22px;">${musica.musica}</td>`;
     tabelaHtml += '<td>';
 
-    tabelaHtml += `<button style="margin-right:20px;" class="btn btn-outline-primary btn-sm" type="button" onclick="ver_letra(${musica.id})"><i class="far fa-file-word"></i></button>`;
-    tabelaHtml += `<button style="margin-right:20px;" class="btn btn-outline-warning btn-sm" type="button" onclick="ver_cifra(${musica.id})"><i class="fas fa-guitar"></i></button>`;
-    tabelaHtml += `<button class="btn btn-outline-danger btn-sm" type="button" onclick="excluir_musica(${musica.id})" style="margin-right: 10px;"><i class="fas fa-trash"></i></button>`;
+    tabelaHtml += `<button style="margin-right:3px;" class="btn btn-outline-primary btn-sm" type="button" onclick="ver_letra(${musica.id})"><i class="far fa-file-word"></i></button>`;
+    tabelaHtml += `<button style="margin-right:3px;" class="btn btn-outline-warning btn-sm" type="button" onclick="ver_cifra(${musica.id})"><i class="fas fa-guitar"></i></button>`;
+    tabelaHtml += `<button class="btn btn-outline-danger btn-sm" type="button" onclick="excluir_musica(${musica.id})" style="margin-right: 3px;"><i class="fas fa-trash"></i></button>`;
 
     tabelaHtml += '</td>';
     tabelaHtml += '</tr>';
