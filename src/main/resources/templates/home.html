@@ -29,8 +29,14 @@
     <link rel="stylesheet" href="/js/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<style>
 
+.swal-wide {
+  width: 80% !important;
+  max-width: 800px !important;
+}
 
+</style>
 
 </head>
 
@@ -148,6 +154,8 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <input id="id_letra_edita" hidden="hidden">
+                    <a href="#" onclick="editar_letra()"><i class="fas fa-pen"></i></a>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>

@@ -196,10 +196,11 @@ function ver_letra(id) {
       if (contentType && contentType.indexOf("application/json") !== -1) {
         return response.json().then(async function (musica) {
           if (musica.letra != null) {
-           document.querySelector('#letra_musica').innerText = musica.letra;
-           $("#letra").modal({
-            show: true
-          });
+            document.querySelector('#letra_musica').innerText = musica.letra;
+            document.querySelector('#id_letra_edita').value = musica.id;
+            $("#letra").modal({
+              show: true
+            });
           } else {
             const { value: letra } = await Swal.fire({
               input: "textarea",
@@ -213,12 +214,11 @@ function ver_letra(id) {
           }
 
         })
-      }else{
+      } else {
         console.log('carai mano');
       }
     });
 }
-
 
 function incluir_cifra(id, url) {
 
@@ -477,6 +477,84 @@ function excluir_bloco(id) {
           }
         })
 
+    }
+  });
+}
+function editar_letra() {
+  Swal.fire({
+    title: "Editar",
+    text: "Confirma edição?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sim"
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+      $('#letra').modal('hide');
+
+      const formData = new FormData();
+      formData.append("id_musica", document.querySelector('#id_letra_edita').value);
+
+      fetch('/ver_letra', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Erro ao buscar a letra.");
+          }
+          return response.json();
+        })
+        .then(async (musica) => {
+          // Exibindo a letra atual no textarea
+          const { value: novaLetra } = await Swal.fire({
+            title: "Editar",
+            input: "textarea",
+            inputValue: musica.letra,
+            showCancelButton: true,
+            confirmButtonText: "Salvar",
+            cancelButtonText: "Cancelar",
+            customClass: {
+              popup: 'swal-wide' // Classe personalizada para largura maior
+            }
+          });
+
+          if (novaLetra !== undefined) {
+            // Confirmar e enviar a nova letra ao servidor
+            Swal.fire({
+              title: "Salvar alterações?",
+              text: "Deseja enviar as alterações para o servidor?",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonText: "Sim",
+              cancelButtonText: "Não",
+            }).then((saveResult) => {
+              if (saveResult.isConfirmed) {
+                const saveData = new FormData();
+                saveData.append("id", document.querySelector('#id_letra_edita').value);
+                saveData.append("letra", novaLetra);
+
+                fetch('/incluir_letra', {
+                  method: 'POST',
+                  body: saveData
+                })
+                  .then(saveResponse => {
+                    if (!saveResponse.ok) {
+                      throw new Error("Erro ao salvar a letra.");
+                    } else {
+                      Swal.fire("Sucesso", "A letra foi salva com sucesso!", "success");
+                    }
+                  });
+              }
+            })
+              .catch(error => {
+                console.error(error);
+                Swal.fire("Erro", "Não foi possível carregar a letra.", "error");
+              });
+          }
+        });
     }
   });
 }

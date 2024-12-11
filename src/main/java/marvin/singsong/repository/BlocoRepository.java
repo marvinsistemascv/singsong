@@ -15,6 +15,6 @@ import java.util.List;
 @Transactional
 public interface BlocoRepository extends JpaRepository<BlocoModel,Integer> {
 
-    @Query(value = "SELECT * FROM bloco_model as a order by a.id", nativeQuery = true)
+    @Query(value = "SELECT * FROM bloco_model as a order by a.bloco", nativeQuery = true)
     List<BlocoModel> pegar_blocos();
 }
