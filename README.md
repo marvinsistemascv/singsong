@@ -1,29 +1,57 @@
-Marvin SingSong  - é mais uma ferramenta desenvolvida pela Marvin Sistemas, essa ferramente tem como principal objetivo auxiliar
-músicos que precisam ter o seu repertório na palma da mão, de forma simples, podendo editar tanto os blocos de musicas como as 
-musicas em si.
+# SingSong - Musician Repertoire & Gig Manager
 
-requisitos :
+SingSong is a web application designed for musicians and bands to
+organize their musical repertoire and manage live performance schedules.
 
-Java 11
-Mysql 8
+The system allows artists to store lyrics, chords and organize songs
+into performance blocks, simplifying live show preparation.
 
-abra o projeto com uma ide para spring boot, compile o *.jar e execute pelo cmd
+---
 
-acessando : 
+## 🎵 Features
 
-localhost:8899/login
-usuário padrão : admin@admin.com
-senha : 123
+✅ Create and manage musical repertoire  
+✅ Store lyrics and chord sheets  
+✅ Organize songs into performance sets  
+✅ Show agenda and event management  
+✅ Responsive interface for mobile usage  
+✅ Quick access during live performances  
+
+---
+
+## 🧠 Architecture
+
+### Backend
+- Java 11
+- Spring Boot
+- Spring Data JPA
+- REST Architecture
+
+### Frontend
+- HTML
+- Bootstrap
+- JavaScript
+- Thymeleaf
+
+### Database
+- MySQL
+
+---
+
+## 🎸 Use Case
+
+Designed especially for:
+
+- Solo musicians
+- Bands
+- Acoustic performers
+- Live show organizers
+
+Helping artists manage songs and performances efficiently.
+
+---
 ![image](https://github.com/marvinsistemascv/singsong/assets/140755651/e0c9726c-11c0-4144-be10-0bd90befb533)
 
 ![image](https://github.com/marvinsistemascv/singsong/assets/140755651/9b4e2275-6033-49f8-ad71-99123fe63451)
 
 ![image](https://github.com/marvinsistemascv/singsong/assets/140755651/b5620956-dc20-47f5-a0c8-15a783ada4c5)
-
-
-
-
-obs : para acessar em rede troqueo "localhost" pelo nome ou endereço de ip do servidor 
-
-Gustavo Matos
-gustavo3635@hotmail.com
