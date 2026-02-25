@@ -47,7 +47,7 @@ public class SingsongApplication {
     public void realizarBackupAutomatico() {
 
         String arquivo = null;
-        arquivo = "C:/MarvinSistemas/SingSong/backup/backup.sql";
+        arquivo = "SEU_LOCAL_DE_BKP/backup.sql";
         try {
             File file = new File(arquivo);
 
@@ -55,7 +55,7 @@ public class SingsongApplication {
 
                 Runtime bck = Runtime.getRuntime();
                 bck.exec("C:/Program Files/MySQL/MySQL Server 8.0/bin/mysqldump.exe -v -v -v --host=localhost "
-                        + "--user=root --password=3635 --port=3306 --protocol=tcp --force --allow-keywords --compress  "
+                        + "--user=root --password=SUA_SENHA --port=3306 --protocol=tcp --force --allow-keywords --compress  "
                         + "--add-drop-table --default-character-set=latin1 --hex-blob  --result-file=" + arquivo
                         + " --databases marvin_singsong");
 
@@ -63,7 +63,7 @@ public class SingsongApplication {
 
                 Runtime bck = Runtime.getRuntime();
                 bck.exec("C:/Program Files/MySQL/MySQL Server 8.0/bin/mysqldump.exe -v -v -v --host=localhost " +
-                        "--user=root --password=3635 --port=3306 --protocol=tcp --force --allow-keywords --compress  " +
+                        "--user=root --password=SUA_SENHA --port=3306 --protocol=tcp --force --allow-keywords --compress  " +
                         "--add-drop-table --default-character-set=latin1 --hex-blob  --result-file=" + arquivo
                         + " --databases marvin_singsong");
             }
